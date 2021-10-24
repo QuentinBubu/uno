@@ -1,0 +1,2 @@
+Changement de sens ne marche pas lors du commencement (commence par j1, j0)
+passer d'afficler marche pas forcement
