@@ -7,11 +7,11 @@ paquet = jeu.creation_jeu()
 joueurs = [
     {
         "nom": "j0",
-        "jeu": [(14, '')]
+        "jeu": []
     },
     {
         "nom": "j1",
-        "jeu": [(14, '')]
+        "jeu": []
     },
     {
         "nom": "j2",
@@ -24,26 +24,21 @@ talon = {
     "jeu": []
 }
 
-cartes.donner_carte(1, talon, paquet)
-talon["dernier_index"] = 0
-
 for j in joueurs:
     cartes.donner_carte(7, j, paquet)
-
-
 
 en_cours = True
 
 ordre = [x for x in joueurs]
 joueur_en_cours = ordre[-1]
 
-
-
-if jeu.premiere_carte(ordre[-1], ordre, talon, paquet) == "passe":
+retour = jeu.premiere_carte(ordre[-1], ordre, talon, paquet)
+if retour == "passe":
     joueur_en_cours = jeu.suivant(joueur_en_cours, ordre)
+elif retour == "sens":
+    joueur_en_cours = ordre[-2]
 
 while en_cours:
-    os.system("cls")
     joueur_en_cours = jeu.suivant(joueur_en_cours, ordre)
     print(f"Dernière carte: {cartes.affichage(talon['jeu'][-1])}")
     carte = cartes.choix(input(f"Quelle carte jouer {joueur_en_cours['nom']}?: \n{jeu.jeu_joueur(joueur_en_cours)}\n"))

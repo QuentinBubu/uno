@@ -49,7 +49,11 @@ def premiere_carte(joueur:dict, ordre:list, talon: list, paquet:list) -> any:
     """    
     talon['jeu'].append(paquet.pop(0))
     if talon['jeu'][-1][0] >= 10:
-        return special_carte(joueur, ordre, talon, paquet)
+        retour = special_carte(joueur, ordre, talon, paquet)
+        if talon['jeu'][-1][0] == 11:
+            return "sens"
+        else:
+            return retour
     return True
 
 
