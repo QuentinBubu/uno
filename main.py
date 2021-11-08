@@ -4,20 +4,15 @@ import os
 
 paquet = jeu.creation_jeu()
 
-joueurs = [
-    {
-        "nom": "j0",
-        "jeu": []
-    },
-    {
-        "nom": "j1",
-        "jeu": []
-    },
-    {
-        "nom": "j2",
-        "jeu": []
-    },
-]
+joueurs = []
+
+for _ in range(int(input("Nombre de joueurs? "))):
+    joueurs.append(
+        {
+            "nom": input("Nom du joueur? "),
+            "jeu": []
+        }
+    )
 
 talon = {
     "dernier_index": None,
