@@ -27,8 +27,6 @@ while rejouer:
 
         en_cours = True
 
-        joueurs[0]['jeu'] = [(13, '')]
-
         ordre = [x for x in joueurs]
         joueur_en_cours = ordre[-1]
 
@@ -51,11 +49,14 @@ while rejouer:
                 while carte == (17, 'undefined'):
                     print("Saisissez une carte valide")
                     carte = cartes.choix(input(f"Quelle carte jouer {joueur_en_cours['nom']}?: \n{jeu.jeu_joueur(joueur_en_cours)}\n"))
+
                 retour = jeu.pose_carte(joueur_en_cours, ordre, talon, carte, paquet)
+
                 if retour == False:
                     carte = (17, 'undefined')
                 else:
                     loop = False
+
             if retour == "passe":
                 joueur_en_cours = jeu.suivant(joueur_en_cours, ordre)
 
@@ -64,14 +65,7 @@ while rejouer:
 
         print(f"Fin du jeu! {joueur_en_cours['nom']} a gagné!")
 
-        for j in joueurs:
-            j['pts'] += cartes.points(j)
-            j['jeu'] = []
-
-        joueurs.sort(key = lambda x: x['pts'])
-        print("Classement:")
-        for c, n in enumerate(joueurs):
-            print(f"n°{c}: {n['nom']} avec {n['pts']} points")
+        print(jeu.classement(joueurs))
 
         if input("Voulez-vous rejouer avec les mêmes joueur? o/n ") != "o":
             rejouer_meme_joueur = False

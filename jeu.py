@@ -1,5 +1,5 @@
 from random import shuffle
-from cartes import affichage, a_carte, donner_carte
+from cartes import affichage, a_carte, donner_carte, points
 
 def creation_jeu() -> list:
     """Creation du packet de jeu
@@ -165,3 +165,23 @@ def special_carte(joueur:dict, ordre:list, talon:dict, paquet:list) -> any:
             return True
         else:
             return "passe"
+
+def classement(joueurs:list) -> str:
+    """génère le texte pour le classement
+
+    Args:
+        joueurs (list): liste des joueurs avec leur fiche
+
+    Returns:
+        str: texte à afficher
+    """    
+    txt = ""
+    for j in joueurs:
+        j['pts'] += points(j)
+        j['jeu'] = []
+
+    joueurs.sort(key = lambda x: x['pts'])
+    txt += "Classement:\n"
+    for c, n in enumerate(joueurs):
+        txt += f"n°{c+1}: {n['nom']} avec {n['pts']} points\n"
+    return txt
