@@ -9,6 +9,7 @@
 - 14 => +4 Jocker
 - 15 => piocher
 - 16 => "couleur"
+- 17 => erreur
 
 ## Joueur
 

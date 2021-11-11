@@ -145,7 +145,7 @@ def special_carte(joueur:dict, ordre:list, talon:dict, paquet:list) -> any:
     """    
     if talon['jeu'][-1][0] == 10:
         donner_carte(2, suivant(joueur, ordre), paquet)
-        return True
+        return "passe"
 
     elif talon['jeu'][-1][0] == 11:
         ordre.reverse()
@@ -160,6 +160,8 @@ def special_carte(joueur:dict, ordre:list, talon:dict, paquet:list) -> any:
             couleur = input("Couleur? ").lower()
         if talon['jeu'][-1][0] == 14:
             donner_carte(4, suivant(joueur, ordre), paquet)
-        talon['jeu'].__delitem__(-1)
         talon['jeu'].append((16, couleur))
-        return True
+        if talon['jeu'][-2][0] == 13:
+            return True
+        else:
+            return "passe"
