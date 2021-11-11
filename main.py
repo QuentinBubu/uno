@@ -1,4 +1,5 @@
-import cartes, jeu, os
+import cartes, jeu
+from os import system as clear
 
 joueurs = []
 rejouer_meme_joueur = True
@@ -38,9 +39,9 @@ while rejouer:
 
         while en_cours:
             joueur_en_cours = jeu.suivant(joueur_en_cours, ordre)
-            os.system('cls')
+            clear('cls')
             input(f"{joueur_en_cours['nom']}, à toi de jouer! Appuies sur entrée!")
-            os.system('cls')
+            clear('cls')
             print(f"Dernière carte: {cartes.affichage(talon['jeu'][-1])}")
             carte = cartes.choix(input(f"Quelle carte jouer {joueur_en_cours['nom']}?: \n{jeu.jeu_joueur(joueur_en_cours)}\n"))
 
@@ -56,6 +57,11 @@ while rejouer:
                     carte = (17, 'undefined')
                 else:
                     loop = False
+
+                if carte == (15, ""):
+                    print(f"Carte piocher: {cartes.affichage(joueur_en_cours['jeu'][-1])}")
+                    if input("Souhaitez-vous la posez maintenant? o/n ") == "o":
+                        joueur_en_cours = ordre[-1]
 
             if retour == "passe":
                 joueur_en_cours = jeu.suivant(joueur_en_cours, ordre)
