@@ -1,9 +1,14 @@
 import cartes, jeu
 from os import system as clear
-
+from sys import plateform
 joueurs = []
 rejouer_meme_joueur = True
 rejouer = True
+
+# Si l'os est linux ou macintosh alors la commande de clear est `clear` sinon utiliser cls
+# Les autres systemes moins courants sont alors ignorés
+clear_command = "clear" if sys.platform == "linux" or sys.platform == "darwin" else "cls"
+
 
 while rejouer:
     for _ in range(int(input("Nombre de joueurs? "))):
@@ -39,9 +44,9 @@ while rejouer:
 
         while en_cours:
             joueur_en_cours = jeu.suivant(joueur_en_cours, ordre)
-            clear('cls')
+            clear(clear_command)
             input(f"{joueur_en_cours['nom']}, à toi de jouer! Appuies sur entrée!")
-            clear('cls')
+            clear(clear_command)
             print(f"Dernière carte: {cartes.affichage(talon['jeu'][-1])}")
             carte = cartes.choix(input(f"Quelle carte jouer {joueur_en_cours['nom']}?: \n{jeu.jeu_joueur(joueur_en_cours)}\n"))
 
